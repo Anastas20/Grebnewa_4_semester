@@ -23,7 +23,7 @@ class ClientThread(threading.Thread):
             data = self.csocket.recv(2048)
             msg = data.decode()
             print('пользователь:', msg)
-            if msg == 'выход':
+            if msg in ('Exit', 'Выход', 'выход'):
                 break
 
             self.csocket.send(bytes(msg,'UTF-8'))
