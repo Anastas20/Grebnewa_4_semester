@@ -10,17 +10,17 @@ sock.bind((HOST, PORT))
 sock.listen(1)
 conn, addr = sock.accept()
 
-p, g, A = pickle.loads(conn.recv(1024))
-b = 4
+p, g, A = pickle.loads(conn.recv(1024))  # для вычисления числа В получим данные от клиента
+b = 8
 B = g ** b % p
-conn.send(pickle.dumps(B))
+conn.send(pickle.dumps(B))  # отправляем число В клиенту
 
 K = A ** b % p
 key = str(K)
 msg = 'Привет!'
-print('Сообщение:', msg)
+print('Сообщение:', msg, key)
 
-msgEn = cryptocode.encrypt(msg, key)
+msgEn = cryptocode.encrypt(msg, key)  # шифруем сообщение с использованием полученного ключа
 conn.send(pickle.dumps(msgEn))
 print('Отправленное сообщение:', msgEn)
 
