@@ -7,7 +7,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # создает се
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((localhost, PORT))
 print('Cервер запущен')
-print('Ожидается ввод пользователя.')
+
 
 class ClientThread(threading.Thread):
     def __init__(self, client_address, clientsocket):
@@ -15,7 +15,7 @@ class ClientThread(threading.Thread):
         self.csocket = clientsocket
         print('Новое подключение:', client_address)
 
-    def run(self):
+    def run(self):     # обработка полученных сообщений от клиента
         print('Подключен:', client_address)
         self.csocket.send(bytes('Это сервер.', 'utf-8'))
         msg = ''
